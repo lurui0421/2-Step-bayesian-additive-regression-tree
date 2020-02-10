@@ -1,21 +1,11 @@
-### Import packages that are needed ###
-Y<-factor(data$H4EC1)
-Y<-as.numeric(Y)
-names(data_modal)
-cov<-data[,c(21:34)]
-names(cov)<-paste("X",1:14,sep="")
-modal_treat<-as.numeric(data_modal$Modal)
-pseudo_treat<-as.numeric(data_pseudo$Modal)
-test<-bartc(response=Y,treatment=modal_treat, confounders=cov, commonSup.rule="sd")
-summary(test)
+install.packages("devtools")
+devtools::install_github("vdorie/bartCause")
 
 ### This function get the upper bound of the reponse surfaces
 get_cutoff<-function(x){
   cutoff<-max(x)+sd(x)
   return(cutoff)}
 
-install.packages("devtools")
-devtools::install_github("vdorie/bartCause")
 
 ### This function will help to delete the non-overlap for predicted observations
 check_olp<-function(data,FUN=get_cutoff)
