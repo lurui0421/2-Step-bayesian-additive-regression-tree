@@ -95,10 +95,6 @@ if (ps.method=="twang")
                        m.3v2))
    return(output) }
 
-
-
-
-
 ### 2-step method for original data ###
 
 step2.result.origin<-matrix(NA, nrow = 100, ncol = 3)
