@@ -91,7 +91,7 @@ Modal_BART<-function(data,size){
 ### Real data analysis 
 ## Clean and prepare the data set 
 data<-read.csv(file=file.choose(),header = TRUE)
-data_modal <- read.csv(file=file.choose(),header = TRUE) 
+data_modal <-read.csv(file=file.choose(),header = TRUE) 
 data_pseudo<-read.csv(file=file.choose(),header=TRUE) 
 data_pseudo_1<-read.csv(file=file.choose(),header=TRUE) 
 Y<-factor(data$H4EC1)
@@ -114,7 +114,6 @@ Test<-BART(merge_data_modal,size=1)
 quantile(Test$`1.vs.2`, c(0.25, .95)) 
 
 Modal_BART(merge_data_pseudo,size=3)
-
 Test_1<-BART(merge_data_pseudo,size=3)
 quantile(Test_1$`1.vs.2`, c(0.25, .95)) 
 quantile(Test_1$`1.vs.3`, c(0.25, .95)) 
