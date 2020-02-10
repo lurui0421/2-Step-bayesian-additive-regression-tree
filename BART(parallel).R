@@ -1,14 +1,10 @@
 ### Fix rJava issue of installing 
 install.packages("rJava")
 library(rJava)
-
-
-
-
-####
 install.packages('parallel')
 library("parallel")
-###: data set used to test functions
+
+### simulate data set use to test functions
 test_parallel<-function(N,p)
       {mat<-data.frame(matrix(rep(rnorm(N),10),ncol=10))
       colnames(mat)<-paste("X",c(1:10),sep="")
@@ -23,11 +19,6 @@ test_parallel<-function(N,p)
  return(data)
 }
 
-
-data_test<-list()
-for (i in 1:100){
-  data_test[[i]]<-test_parallel(1000,0.5)
-}
 ### BART with parallel computing 
 parallel_bart<-function(data_list,mc.cores = 4){
 ATEs <- mclapply(X= data_test, FUN = BART,mc.cores =mc.cores)
@@ -36,17 +27,3 @@ var_ATE<-var(unlist(ATEs))
 result<-c(mean_ATE,var_ATE)
 names(result)<-c("mean_ATE","var_ATE")
 return(result)}
-
-test_1<-parallel_bart(data_test)
-test_2<-Modal_BART(test_data)
-
-test_1
-test_2
-
-
-
-
-
-
-
-  
