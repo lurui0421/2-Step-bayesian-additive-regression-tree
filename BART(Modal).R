@@ -9,13 +9,10 @@ pseudo_treat<-as.numeric(data_pseudo$Modal)
 test<-bartc(response=Y,treatment=modal_treat, confounders=cov, commonSup.rule="sd")
 summary(test)
 
-
-
 ### This function get the upper bound of the reponse surfaces
 get_cutoff<-function(x){
   cutoff<-max(x)+sd(x)
   return(cutoff)}
-
 
 install.packages("devtools")
 devtools::install_github("vdorie/bartCause")
@@ -46,7 +43,6 @@ pairwise.diffs <- function(x)
   colnames(result) <- paste(colnames(x)[col.diffs[, 1]], ".vs.",  colnames(x)[col.diffs[, 2]], sep = "")
   return(result)
   }
-
 
 ### Vanilla BART function 
 BART<-function(data,FUN=check_olp,size)
@@ -80,6 +76,7 @@ BART<-function(data,FUN=check_olp,size)
       result<-as.data.frame(result)
       result<-result[!duplicated(as.list(result))]
       return(result)}
+
 #### model_BART
 Modal_BART<-function(data,size){
   ATEs <- BART(data,FUN=check_olp,size)
@@ -90,6 +87,7 @@ Modal_BART<-function(data,size){
   names(sd_ATE)<-paste("sd:",names(sd_ATE))
   return(c(mean_ATE,sd_ATE))
          }
+
 ### Real data analysis 
 ## Clean and prepare the data set 
 data<-read.csv(file=file.choose(),header = TRUE)
@@ -111,7 +109,6 @@ merge_data_pseudo_1<-data.frame(cov=cov,treat=pseudo_treat_1,Y=Y)
 Modal_BART(merge_data_modal,size=1)
 Modal_BART(merge_data_pseudo_1,size=1)
 
-
 ## Get confidence interval 
 Test<-BART(merge_data_modal,size=1)
 quantile(Test$`1.vs.2`, c(0.25, .95)) 
@@ -122,7 +119,5 @@ Test_1<-BART(merge_data_pseudo,size=3)
 quantile(Test_1$`1.vs.2`, c(0.25, .95)) 
 quantile(Test_1$`1.vs.3`, c(0.25, .95)) 
 quantile(Test_1$`2.vs.3`, c(0.25, .95)) 
-
-
 
 
