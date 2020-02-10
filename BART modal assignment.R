@@ -67,7 +67,7 @@ BART<-function(data,FUN=check_olp,size)
       result<-result[!duplicated(as.list(result))]
       return(result)}
 
-#### model_BART
+#### modal assignment BART
 Modal_BART<-function(data,size){
   ATEs <- BART(data,FUN=check_olp,size)
   ## Estimate mean ATES and variance ATE based on assignments 
